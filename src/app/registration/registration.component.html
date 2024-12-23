@@ -1,0 +1,146 @@
+
+<div class="row">
+    <div class="class col-md-4">
+        <div class="card">
+            <div class="card-header card-header-danger">
+              <h4 class="card-title">Registration Form</h4>
+              <p class="card-category">Employees Details</p>
+            </div>
+            <div class="card-body">
+        <form [formGroup]="kajalForm">
+        <div class="form-group">
+            <label class="txcol" ><b>ID:</b></label>
+            <input type="number" class="form-control" placeholder="Enter Id" formControlName="idd" [ngClass]="{'is-invalid':subBtn  && f['idd'].errors}">
+            <div *ngIf="subBtn && f['idd'].errors" class="invalid-feedback">
+              <div *ngIf="f['idd'].errors['required']">
+              Id is Required.......!
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="txcol" ><b>NAME:</b></label>
+            <input type="text" class="form-control" placeholder="Enter Name" formControlName="name" [ngClass]="{'is-invalid':subBtn  && f['name'].errors}">
+            <div *ngIf="subBtn && f['name'].errors" class="invalid-feedback">
+              Name is Required.......!
+            </div> 
+          </div>
+          <div class="form-group">
+            <label class="txcol"><b>COUNTRY:</b></label>
+            <input type="text" class="form-control" placeholder="Enter Counrty" formControlName="country" [ngClass]="{'is-invalid':subBtn  && f['country'].errors}">
+            <div *ngIf="subBtn && f['country'].errors" class="invalid-feedback">
+              Country is Required.......!
+            </div> 
+          </div>
+          <div class="form-group">
+            <label class="txcol"><b>CITY:</b></label>
+            <input type="text" class="form-control" placeholder="Enter City" formControlName="city"[ngClass]="{'is-invalid':subBtn  && f['city'].errors}">
+            <div *ngIf="subBtn && f['city'].errors" class="invalid-feedback">
+              City is Required.......!
+            </div>  
+          </div>
+          <div class="form-group">
+            <label class="txcol"><b>Gender:</b></label>
+            <ng-container  *ngFor="let gen of gender">
+            <input type="radio"  formControlName="gender" value="{{gen}}">{{gen}}
+          </ng-container>
+        
+        </div>
+
+          <!-- <div class="form-group">
+              <label class="txcol"><b>Gender:</b></label>
+            <div class="col-lg-6">
+            <label for="text ">Male:</label>
+            <input type="radio"   value="male" name="gender" formControlName="gender"
+            [ngClass]="{'is-invalid': subBtn && f['gender'].errors}">
+            <div *ngIf="subBtn && f['gender'].errors">
+              <div *ngIf="subBtn && f['gender'].errors['required']" class="invalid-feedback">
+              gender is  required.
+              </div>
+           
+            </div>
+          </div>
+     
+          <div class="col-lg-6">
+            <label for="text " >Female:</label>
+            <input type="radio"   value="female" name="gender" formControlName="gender">
+          </div>
+          
+          </div> -->
+          <div class="form-group">
+            <label class="txcol"><b>Qualification:</b></label>
+           
+            <select  formControlName="qualifications"  class="form-control input-select " 
+            [ngClass]="{'is-invalid': subBtn && f['qualifications'].errors}">
+            <div *ngIf="subBtn && f['qualifications'].errors">
+              <div *ngIf="subBtn && f['qualifications'].errors['required']" class="invalid-feedback">
+                qualifications is  required.
+              </div>
+            </div>
+            <option *ngFor="let qu of qualifications">{{qu}}</option>
+          </select>
+          
+    
+          </div>
+          <div class="form-group">
+            <label class="txcol"><b>Checkbox:</b></label>
+            <div  *ngFor="let che of checkbox">
+              <input type="checkbox" id="scales" name="scales"
+              checked formControlName="checkbox">{{che}}
+            </div>
+            <br><br>
+        </div>
+          <button  *ngIf="editbtn==false" type="submit" class="btn btn-primary" (click)="formSubmit()" style="margin-right: 12rem;">Submit</button>
+          <button *ngIf="editbtn==true"  class="btn btn-success" (click)="formUpdate()"style="margin-right: 12rem;">Update</button>
+          <button  class="btn btn-secondary"(click)="formClear()">Clear</button>
+       
+        </form>
+    </div>
+</div>
+    </div>
+    <div class="col-md-8">
+        
+        
+        <div class="card" >
+            <div class="card-header card-header-danger">
+                <h4 class="card-title ">Table</h4>
+               <p class="card-category"> Details Table</p>
+            </div>
+            <div class="card-body">
+                <div>
+                    <input class="form-control mr-sm-2" type="text" placeholder="Search">
+
+                </div>
+                <div class="table-responsive" style="height: 580px;">
+                    <table class="table">
+                        <thead class=" text-primary">
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Country</th>
+                            <th>City</th>
+                            <th>Gender</th>
+                            <th>Qualification</th>
+                            <th>Checkbox</th>
+                            <th>Action</th>
+                           </thead>
+                        <tbody>
+                            <tr class *ngFor="let kajal of kajalarray">
+                                <td>{{kajal.idd}}</td>
+                                <td>{{kajal.name}}</td>
+                                <td>{{kajal.country}}</td>
+                                <td>{{kajal.city}}</td>
+                                <td>{{kajal.gender}}</td>
+                                <td>{{kajal.qualifications}}</td>
+                                <td>{{kajal.checkbox}}</td>
+                                <td>
+                                    <button  class="btn btn-warning" (click)="update(kajal)" style="margin-right: 1rem;">Edit</button>
+                                    <button class="btn btn-danger" (click)="delTb(kajal.id)">Delete </button>
+                                </td>
+                            </tr>
+                            
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
